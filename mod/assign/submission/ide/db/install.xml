@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="mod/assign/submission/ide/db" VERSION="20161203" COMMENT="XMLDB file for Moodle mod/assign/submission/ide"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="assignsubmission_ide" COMMENT="Info about IDE submissions">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="assignment" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="The assignment for this IDE submission"/>
+        <FIELD NAME="submission" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="the submission instance of this ide submission"/>
+        <FIELD NAME="text" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="The text in the IDE submission"/>
+        <FIELD NAME="lang" TYPE="text" NOTNULL="true" SEQUENCE="false" COMMENT="Language of the code in this IDE submission"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="assignment" TYPE="foreign" FIELDS="assignment" REFTABLE="assign" REFFIELDS="id" COMMENT="Assignment Instance"/>
+        <KEY NAME="submission" TYPE="foreign" FIELDS="submission" REFTABLE="assign_submission" REFFIELDS="id" COMMENT="Submission Instance"/>
+      </KEYS>
+    </TABLE>
+  </TABLES>
+</XMLDB>

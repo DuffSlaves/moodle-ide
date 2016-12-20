@@ -1,0 +1,3 @@
+[submodule "mod/assign/submission/ide/lib/CodeMirror"]
+	path = mod/assign/submission/ide/lib/CodeMirror
+	url = https://github.com/codemirror/CodeMirror.git
