@@ -30,9 +30,13 @@ run.addEventListener('click', function(elem){
     var text = cMirror.getValue();
     //call all compliation stuff
     cMirror.setValue("");
-    alert('requesting');
-    var request = $.post('compile.php', {'text':text, 'lang':cMirror.getOption('mode')}, ajaxCallback());
-    alert('requested');
+    var lang = cMirror.getOption('mode');
+    if (lang !== 'javascript') {
+        $.post('compile.php', {'text':text, 'lang':lang}, ajaxCallback);
+    }
+    else {
+        eval(text);
+    }
 });
 
 //setup for language swapping
