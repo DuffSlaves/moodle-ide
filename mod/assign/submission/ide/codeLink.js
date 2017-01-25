@@ -2,6 +2,7 @@ var cMirror = CodeMirror(document.getElementById('IDE_spacer'),{
     lineNumbers:true
 });
 var string, scripts=[];
+var request;
 CodeMirror.modeURL='http://localhost/moodle/mod/assign/submission/ide/lib/CodeMirror/mode/%N/%N.js';
 scripts.push(cMirror.getOption('mode'));
 //put in default values according to language
@@ -32,7 +33,14 @@ run.addEventListener('click', function(elem){
     cMirror.setValue("");
     var lang = cMirror.getOption('mode');
     if (lang !== 'javascript') {
-        $.post('compile.php', {'text':text, 'lang':lang}, ajaxCallback);
+        request = $.ajax({url:'compile.php',
+            type:'post',
+            data: {text:text, lang:lang},
+            dataType:'json',
+            timeout:3000});
+        request.done(function (result){
+            eval(result);
+        });
     }
     else {
         eval(text);
@@ -73,14 +81,18 @@ function relog() {
     window.console.log = function (msg) {
         cMirror.setValue(cMirror.getValue() + msg);
     };
+    window.console.warn = function (msg) {
+        cMirror.setValue(cMirror.getValue() + msg);
+    };
+    window.console.info = function (msg) {
+        cMirror.setValue(cMirror.getValue() + msg);
+    };
+    window.console.debug = function (msg) {
+        cMirror.setValue(cMirror.getValue() + msg);
+    }
 }
 
-function ajaxCallback(data, status){
-    alert(data);
-    cMirror.setValue(data);
-    alert(status);
 
-}
 
 
 
