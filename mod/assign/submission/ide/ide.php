@@ -15,13 +15,13 @@ class HTML_QuickForm_ide extends HTML_QuickForm_element
     var $_lang = null;
 
     var $_supported_langs = array(
-        'java',
-        'javascript',
+        'Java',
+        'Javascript',
         'php',
-        'haskell',
-        'c++',
-        'objective_c',
-        'c#',
+        'Haskell',
+        'C++14',
+        'Objective-C',
+        'C#',
     );
 
     /**

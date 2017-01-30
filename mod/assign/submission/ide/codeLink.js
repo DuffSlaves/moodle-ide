@@ -30,16 +30,19 @@ run.addEventListener('click', function(elem){
     relog();
     var text = cMirror.getValue();
     //call all compliation stuff
-    cMirror.setValue("");
+    //cMirror.setValue("");
     var lang = cMirror.getOption('mode');
     if (lang !== 'javascript') {
-        request = $.ajax({url:'compile.php',
+        request = $.ajax({url:'http://localhost/moodle/mod/assign/submission/ide/compile.php',
             type:'post',
             data: {text:text, lang:lang},
-            dataType:'json',
-            timeout:3000});
-        request.done(function (result){
-            eval(result);
+            timeout:6000,
+            success:function (result){
+                eval(result);
+            },
+            failure: function(jqXHR, textStatus, errorThrown) {
+                alert(textStatus);
+            }
         });
     }
     else {
@@ -66,7 +69,7 @@ if(select) {
             //var script = document.createElement('script');
             //script.setAttribute('src', dir + mode + '/' + mode + '.js');
             //spacer.insertBefore(script, spacer.firstChild);
-            alert('changing mode');
+            //alert('changing mode');
             cMirror.setOption('mode', mode);
             CodeMirror.autoLoadMode(cMirror, mode);
             scripts.push(mode);
