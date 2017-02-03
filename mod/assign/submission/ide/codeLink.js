@@ -3,7 +3,7 @@ var cMirror = CodeMirror(document.getElementById('IDE_spacer'),{
 });
 var string, scripts=[];
 var request;
-CodeMirror.modeURL='http://localhost/moodle/mod/assign/submission/ide/lib/CodeMirror/mode/%N/%N.js';
+CodeMirror.modeURL=window.location.origin + '/moodle/mod/assign/submission/ide/lib/CodeMirror/mode/%N/%N.js';
 scripts.push(cMirror.getOption('mode'));
 //put in default values according to language
 if(cMirror.getValue() == '') {
@@ -33,7 +33,7 @@ run.addEventListener('click', function(elem){
     //cMirror.setValue("");
     var lang = cMirror.getOption('mode');
     if (lang !== 'javascript') {
-        request = $.ajax({url:'http://localhost/moodle/mod/assign/submission/ide/compile.php',
+        request = $.ajax({url:window.location.origin + '/moodle/mod/assign/submission/ide/compile.php',
             type:'post',
             data: {text:text, lang:lang},
             timeout:6000,
@@ -54,7 +54,7 @@ run.addEventListener('click', function(elem){
 var select = document.getElementById('id_ide_lang');
 if(select) {
     select.addEventListener('change', function (elem) {
-        var dir = 'http://localhost/moodle/mod/assign/submission/ide/lib/CodeMirror/mode/';
+        var dir = window.location.origin + '/moodle/mod/assign/submission/ide/lib/CodeMirror/mode/';
         var mode = select.options[select.value].text;
         var exists = false;
 
