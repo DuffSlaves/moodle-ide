@@ -3,7 +3,7 @@ var cMirror = CodeMirror(document.getElementById('IDE_spacer'),{
 });
 var string, scripts=[];
 var request;
-CodeMirror.modeURL='http://localhost/moodle/mod/assign/submission/ide/lib/CodeMirror/mode/%N/%N.js';
+CodeMirror.modeURL=window.location.origin + '/moodle/mod/assign/submission/ide/lib/CodeMirror/mode/%N/%N.js';
 scripts.push(cMirror.getOption('mode'));
 //put in default values according to language
 if(cMirror.getValue() == '') {
@@ -30,16 +30,19 @@ run.addEventListener('click', function(elem){
     relog();
     var text = cMirror.getValue();
     //call all compliation stuff
-    cMirror.setValue("");
+    //cMirror.setValue("");
     var lang = cMirror.getOption('mode');
     if (lang !== 'javascript') {
-        request = $.ajax({url:'compile.php',
+        request = $.ajax({url:window.location.origin + '/moodle/mod/assign/submission/ide/compile.php',
             type:'post',
             data: {text:text, lang:lang},
-            dataType:'json',
-            timeout:3000});
-        request.done(function (result){
-            eval(result);
+            timeout:6000,
+            success:function (result){
+                eval(result);
+            },
+            failure: function(jqXHR, textStatus, errorThrown) {
+                alert(textStatus);
+            }
         });
     }
     else {
@@ -51,7 +54,7 @@ run.addEventListener('click', function(elem){
 var select = document.getElementById('id_ide_lang');
 if(select) {
     select.addEventListener('change', function (elem) {
-        var dir = 'http://localhost/moodle/mod/assign/submission/ide/lib/CodeMirror/mode/';
+        var dir = window.location.origin + '/moodle/mod/assign/submission/ide/lib/CodeMirror/mode/';
         var mode = select.options[select.value].text;
         var exists = false;
 
@@ -66,7 +69,7 @@ if(select) {
             //var script = document.createElement('script');
             //script.setAttribute('src', dir + mode + '/' + mode + '.js');
             //spacer.insertBefore(script, spacer.firstChild);
-            alert('changing mode');
+            //alert('changing mode');
             cMirror.setOption('mode', mode);
             CodeMirror.autoLoadMode(cMirror, mode);
             scripts.push(mode);

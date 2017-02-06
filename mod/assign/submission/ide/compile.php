@@ -1,50 +1,25 @@
 <?php
-    function deleteDir($dirPath) {
-        if (substr($dirPath, strlen($dirPath) - 1, 1) != '/') {
-            $dirPath .= '/';
-        }
-        $files = glob($dirPath . '*', GLOB_MARK);
-        foreach ($files as $file) {
-            if (is_dir($file)) {
-                deleteDir($file);
-            } else {
-                unlink($file);
-            }
-        }
-        rmdir($file);
-    }
-
-    function tempdir()
-    {
-        $tempfile = tempnam(sys_get_temp_dir(), 'moodle');
-        if (file_exists($tempfile)) {
-            unlink($tempfile);
-        }
-
-        mkdir($tempfile);
-        if (is_dir($tempfile)) {
-            return $tempfile;
-        }
-    }
-
     $object['text'] = $_POST['text'];
     $object['lang'] = $_POST['lang'];
     
-    $tmp = tempdir();
-
     $json = json_encode($object);
 
-    $input = fopen($tmp + "\input", "rw");
-    fwrite($input, $json);
-    fclose($input);
+    $input  = tempnam(sys_get_temp_dir(), 'moodle');
+    $output = tempnam(sys_get_temp_dir(), 'moodle');
+    $outtxt = "";
 
-    exec("convert-to-js " + $tmp + "\input " + $tmp + "\output");
+    file_put_contents($input, $json);
 
-    $js = file_get_contents($tmp + "\input", "r");
+    exec("/home/potato/dev/execution-backend/commands/convert-to-js " . $input . " " . $output, $outtxt);
 
-    deleteDir($tmp);
+    error_log("Compiled successfully");
+
+    $js = file_get_contents($output);
+
+    unlink($input);
+    unlink($output);
     
-    echo($js);
+    echo $js;
 
 
 
