@@ -178,8 +178,8 @@ class HTML_QuickForm_ide extends HTML_QuickForm_element
             preg_replace("/(\r\n|\n|\r)/", '&#010;', htmlspecialchars($this->_value)) .
             '</textarea>'.
             // replace the text area with a custom editor from CodeMirror
-            '<script src="http://localhost/CodeMirror/lib/codemirror.js"></script>
-            <link rel="stylesheet" href="http://localhost/CodeMirror/lib/codemirror.css">
+            '<script src="http://' . $_SERVER['HTTP_HOST'] . '/CodeMirror/lib/codemirror.js"></script>
+            <link rel="stylesheet" href="http://' . $_SERVER['HTTP_HOST'] . '/CodeMirror/lib/codemirror.css">
             <script src="mode/javascript/'.$this->_lang.'.js"></script>'.$this->getLangs()
             .'<script> var cMirror = CodeMirror.fromTextArea(document.getElementById(\'id_onlinetext_editoreditable\')
             </script>';
