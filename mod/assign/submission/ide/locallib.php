@@ -80,7 +80,7 @@
              $mform->addElement('select', 'ide_lang', 'Language', $this->get_languages());
          }
 
-         $mform->addElement('static', 'ide_script', '<script src="http://' . $_SERVER['HTTP_HOST'] . 'localhost/moodle/mod/assign/submission/ide/codeLink.js"></script>');
+         $mform->addElement('static', 'ide_script', '<script src="http://' . $_SERVER['HTTP_HOST'] . '/moodle/mod/assign/submission/ide/codeLink.js"></script>');
 
 
          return true;
