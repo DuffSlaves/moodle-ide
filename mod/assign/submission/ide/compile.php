@@ -10,7 +10,7 @@
 
     file_put_contents($input, $json);
 
-    exec("/home/potato/dev/execution-backend/commands/convert-to-js " . $input . " " . $output, $outtxt);
+    exec("convert-to-js " . $input . " " . $output, $outtxt);
 
     error_log("Compiled successfully");
 
