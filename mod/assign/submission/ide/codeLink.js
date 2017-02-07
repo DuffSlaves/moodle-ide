@@ -82,16 +82,16 @@ if(select) {
 
 function relog() {
     window.console.log = function (msg) {
-        cMirror.setValue(cMirror.getValue() + msg);
+        cMirror.setValue(cMirror.getValue() + msg + "\n");
     };
     window.console.warn = function (msg) {
-        cMirror.setValue(cMirror.getValue() + msg);
+        cMirror.setValue(cMirror.getValue() + msg + "\n");
     };
     window.console.info = function (msg) {
-        cMirror.setValue(cMirror.getValue() + msg);
+        cMirror.setValue(cMirror.getValue() + msg + "\n");
     };
     window.console.debug = function (msg) {
-        cMirror.setValue(cMirror.getValue() + msg);
+        cMirror.setValue(cMirror.getValue() + msg + "\n");
     }
 }
 
