@@ -36,7 +36,7 @@ run.addEventListener('click', function(elem){
         request = $.ajax({url:window.location.origin + '/moodle/mod/assign/submission/ide/compile.php',
             type:'post',
             data: {text:text, lang:lang},
-            timeout:6000,
+            timeout:20000,
             success:function (result){
                 eval(result);
             },
