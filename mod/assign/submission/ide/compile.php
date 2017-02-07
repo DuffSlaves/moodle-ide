@@ -10,7 +10,7 @@
 
     file_put_contents($input, $json);
 
-    exec("convert-to-js " . $input . " " . $output, $outtxt);
+    exec(getenv("BACKEND_INSTALL_DIR") . "/commands/convert-to-js " . $input . " " . $output, $outtxt);
 
     error_log("Compiled successfully");
 
