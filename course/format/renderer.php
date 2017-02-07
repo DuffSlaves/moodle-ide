@@ -945,7 +945,7 @@ abstract class format_section_renderer_base extends plugin_renderer_base {
             echo $this->end_section_list();
         }
         //custom script for accordion topics/weeks/etc.
-        echo html_writer::script(false, 'http://localhost/moodle/course/format/topics/accordion.js');
+        echo html_writer::script(false, 'http://' . $_SERVER['HTTP_HOST'] . 'moodle/course/format/topics/accordion.js');
     }
 
     /**

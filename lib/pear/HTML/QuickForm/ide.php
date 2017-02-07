@@ -179,9 +179,9 @@ class HTML_QuickForm_ide extends HTML_QuickForm_element
             return '<div id="IDE_spacer">' .
             $this->_getTabs() .
             // Insert custom CodeMirror Editor
-            '<script src="http://localhost/moodle/mod/assign/submission/ide/lib/CodeMirror/lib/codemirror.js"></script>
-            <link rel="stylesheet" href="http://localhost/moodle/mod/assign/submission/ide/lib/CodeMirror/lib/codemirror.css">
-            <script src="http://localhost/moodle/mod/assign/submission/ide/lib/CodeMirror/mode/'
+            '<script src="http://' . $_SERVER['HTTP_HOST'] . '/moodle/mod/assign/submission/ide/lib/CodeMirror/lib/codemirror.js"></script>
+            <link rel="stylesheet" href="http://' . $_SERVER['HTTP_HOST'] . '/moodle/mod/assign/submission/ide/lib/CodeMirror/lib/codemirror.css">
+            <script src="http://' . $_SERVER['HTTP_HOST'] . '/moodle/mod/assign/submission/ide/lib/CodeMirror/mode/'
             .$this->_lang.'/'.$this->_lang.'.js"></script>';
         }
     } //end func toHtml
